@@ -3,7 +3,7 @@ import './App.css'
 import useApiClient from './hooks/useApiClient'
 
 function App() {
-  const apiClient = useApiClient();
+  const { fetchResults, queryResults } = useApiClient();
   const [query, setQuery] = useState("")
 
   return (
@@ -15,13 +15,15 @@ function App() {
           onChange={(val) => setQuery(val.target.value)}
         />
         <p>
-          <button type="button" title='click me' onClick={() => apiClient.fetchResults(query)} >
+          <button type="button" title='click me' onClick={() => fetchResults(query)} >
             Click Me
           </button>
         </p>
       </div>
       <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
+        {queryResults && queryResults.map((hitObject) => (
+          <li key={hitObject.id}>{hitObject.content}</li>
+        ))}
       </p>
     </>
   )
