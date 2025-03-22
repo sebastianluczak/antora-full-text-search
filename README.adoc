@@ -1,0 +1,38 @@
+= Antora Full-Text-Search
+
+Antora Full-Text-Search is a plugin that enables full-text search capabilities for Antora-based documentation sites. 
+
+This project is about to explore different approaches to FTS in Antora.
+
+== Option 1: Lunr
+
+link:https://gitlab.com/antora/antora-lunr-extension[Using Antora Lunr Extension] we're able to parse content, build index and push it to Lunr during build time.
+
+While easy to setup, Lunr index becomes large and can impact the performance of the site, especially for documentation with a significant amount of content. 
+
+Additionally, it requires the entire index to be loaded into the browser.
+
+=== Lunr summary
+
+|===
+|Pros | Cons
+
+| * Easy setup
+| * Non-flexible +
+* Heavy index
+|===
+
+== Option 2: TBD
+
+...
+
+== Option X: Cloud integration
+
+See link:./cloud_integration.md[Other methods considered.]
+
+== Development
+
+[shell,terminal]
+====
+devenv shell
+====
