@@ -107,10 +107,3 @@ Since you're looking to implement Full Text Search (FTS) outside of Antora’s g
 | **SQLite FTS in Cloud Run** | Small-scale, low-cost deployments | 📉 Low | 🛠️ Low | 💰 Low |
 
 ---
-
-## **Final Thoughts**
-Would you be interested in **hybrid approaches**, like:  
-- Using **BigQuery** for analytics but **Algolia/Elasticsearch** for real-time search?  
-- Pre-processing data into **Google Cloud Search** but exposing **alternative search APIs** for more control?  
-
-🚀 Let me know which direction interests you the most!
