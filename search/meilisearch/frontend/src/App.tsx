@@ -20,11 +20,22 @@ function App() {
           </button>
         </p>
       </div>
-      <p className="read-the-docs">
+      <div className="query-results">
         {queryResults && queryResults.map((hitObject) => (
-          <li key={hitObject.id}>{hitObject.content}</li>
+          <div
+            className='query-result'
+            key={hitObject.id}
+            dangerouslySetInnerHTML={{
+              __html: `
+              <h2>${hitObject.mainTitle} ${hitObject.mainVersion}</h2>
+              <small>${hitObject.path}</small>
+              <hr />
+              ${hitObject._formatted.content}
+              `,
+            }}
+          />
         ))}
-      </p>
+      </div >
     </>
   )
 }

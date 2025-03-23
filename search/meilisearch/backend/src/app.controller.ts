@@ -11,12 +11,8 @@ export class AppController {
   async getHello(@Query('query') search: string) {
     const timeBefore = new Date().getTime();
     await this.appService.addDocuments();
-
     const results = await this.appService.searchFor(search || '');
-
-    const timeAfter = new Date().getTime();
-
-    this.logger.log(`Took ${timeAfter - timeBefore} ms`);
+    this.logger.log(`Took ${new Date().getTime() - timeBefore} ms`);
 
     return results;
   }

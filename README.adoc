@@ -22,9 +22,26 @@ Additionally, it requires the entire index to be loaded into the browser.
 * Heavy index
 |===
 
-== Option 2: TBD
+== Option 2: Meilisearch
 
-...
+Implementation available in `./search/meilisearch` both FE and BE.
+
+TODO: Search Cache Invalidation
+
+TODO: How to refresh index, partially or whole?
+
+TODO: Performance impact
+
+TODO: Matching components in Antora to Documents in Meilisearch
+
+TODO: Attributes stored in Meilisearch
+
+Consider this:
+
+* source-of-truth stops being source-of-truth - is it possible to avoid data duplication?
+* should we index latest versions of components or all components?
+* how to present data on frontend (i.e. attributes, facets, query language etc.
+* extraction of title of page for Search Results?
 
 == Option X: Cloud integration
 

@@ -22,25 +22,54 @@ const sanitizeHtmlToPlainText = (html: string): string => {
   return html;
 };
 
+type InfoFile = {
+  title: string;
+  version: string;
+};
+
+type BuiltDocument = {
+  id: number;
+  mainTitle: string;
+  mainVersion: string;
+  path: string;
+  content: string;
+};
+
 @Injectable()
 export class AppService {
   private readonly logger = new Logger(AppService.name);
   private index = client.index('index');
 
-  getHello(): string {
-    return 'Hello World!';
-  }
-
   async buildDocuments() {
-    const paths = await glob('../../../antora_build/**/*.html');
+    const paths = await glob('../../../antora_build/{**/*.html,**/info.json}');
     console.log(paths);
-    const builtDocuments: { id: number; path: string; content: string }[] = [];
-    paths.forEach((path, index) => {
-      const content = readFileSync(path);
-      builtDocuments.push({
-        id: index,
-        path: path,
-        content: sanitizeHtmlToPlainText(content.toString()),
+    const builtDocuments: BuiltDocument[] = [];
+
+    const infoJsonPaths = paths.filter((path) => path.endsWith('info.json'));
+
+    // info.json file represents an antora artifact we want to index.
+    // `paths` contains all HTML documents in this artifact we want to index.
+    // contents of `info.json` helps us match document to particular antora artifact
+    infoJsonPaths.forEach((infoJsonPath) => {
+      const contentOfInfoJson = readFileSync(infoJsonPath);
+      const parsedInfoJson = JSON.parse(
+        contentOfInfoJson.toString(),
+      ) as InfoFile;
+
+      const pathsToLookFor = infoJsonPath.replace('info.json', '');
+      const htmlDocumentsForThisArtifact = paths.filter((path) =>
+        path.startsWith(pathsToLookFor),
+      );
+
+      htmlDocumentsForThisArtifact.forEach((path, index) => {
+        const content = readFileSync(path);
+        builtDocuments.push({
+          id: index,
+          mainTitle: parsedInfoJson.title,
+          mainVersion: parsedInfoJson.version,
+          path: path,
+          content: sanitizeHtmlToPlainText(content.toString()),
+        });
       });
     });
 

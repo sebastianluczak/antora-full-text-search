@@ -11,9 +11,11 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -22,6 +24,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -39,4 +42,44 @@
 
 .read-the-docs {
   color: #888;
+}
+
+.query-results {
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.query-result {
+  padding: 15px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.query-result h2 {
+  margin: 0 0 10px;
+}
+
+.query-result small {
+  display: block;
+  margin-bottom: 10px;
+  color: #666;
+}
+
+.query-result hr {
+  border: none;
+  border-top: 1px solid #eee;
+  margin: 10px 0;
+}
+
+.query-result p {
+  margin: 0;
+  color: #444;
+}
+
+.query-result em {
+  text-decoration: underline;
+  font-weight: bolder;
 }

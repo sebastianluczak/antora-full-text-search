@@ -1,5 +1,5 @@
 site:
-  title: Docs Site
+  title: PLAYGROUND
   start_page: component-b::index.adoc
 content:
   sources:
@@ -17,3 +17,4 @@ output:
 antora:
   extensions:
     - "@antora/lunr-extension"
+    - ./lib/createJsonMetadata.js
