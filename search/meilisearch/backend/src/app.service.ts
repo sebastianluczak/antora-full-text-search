@@ -38,11 +38,10 @@ type BuiltDocument = {
 @Injectable()
 export class AppService {
   private readonly logger = new Logger(AppService.name);
-  private index = client.index('index');
+  private index = client.index('documents_search_index');
 
   async buildDocuments() {
     const paths = await glob('../../../antora_build/{**/*.html,**/info.json}');
-    console.log(paths);
     const builtDocuments: BuiltDocument[] = [];
 
     const infoJsonPaths = paths.filter((path) => path.endsWith('info.json'));
@@ -57,14 +56,19 @@ export class AppService {
       ) as InfoFile;
 
       const pathsToLookFor = infoJsonPath.replace('info.json', '');
-      const htmlDocumentsForThisArtifact = paths.filter((path) =>
-        path.startsWith(pathsToLookFor),
+      const htmlDocumentsForThisArtifact = paths.filter(
+        (path) =>
+          path.startsWith(pathsToLookFor) && !path.endsWith('info.json'),
       );
+      console.log(htmlDocumentsForThisArtifact);
 
-      htmlDocumentsForThisArtifact.forEach((path, index) => {
+      htmlDocumentsForThisArtifact.forEach((path) => {
         const content = readFileSync(path);
+        this.logger.debug(
+          `Registering ${parsedInfoJson.title} search partial: ${path}`,
+        );
         builtDocuments.push({
-          id: index,
+          id: Math.floor(Math.random() * 10000),
           mainTitle: parsedInfoJson.title,
           mainVersion: parsedInfoJson.version,
           path: path,

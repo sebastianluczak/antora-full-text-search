@@ -16,7 +16,7 @@ module.exports.register = function () {
 
     components.forEach(element => {
       // todo: this works only for latest version, which should be preferred in context of search engine (?)
-      const componentPart = element.latest.url.split("/").splice(0, 3).join("/");
+      const componentPart = element.latest.url.split("/").splice(0, 2).join("/");
       fs.writeFileSync(basePath + componentPart + "/info.json", JSON.stringify({
         title: element.latest.title,
         version: element.latest.version,
